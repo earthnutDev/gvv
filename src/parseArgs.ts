@@ -1,6 +1,7 @@
 import { isUndefined } from 'a-type-of-js';
 import { command } from './command';
 import { dataStore } from './data-store';
+import { dog } from './dog';
 
 /**
  *
@@ -71,4 +72,6 @@ export function parseArgs(): void {
   if (argsMap['init']) {
     commandParameters.init = dataStore.init = true;
   }
+
+  dog('参数解析完毕', dataStore);
 }

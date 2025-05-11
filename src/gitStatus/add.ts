@@ -1,9 +1,11 @@
+import { dataStore } from './../data-store';
 import { dog } from './../dog';
 import { gitError } from '../utils';
 import { _p, runOtherCode } from 'a-node-tools';
-import { notTrack, trackedButNotStaged } from './trackAndStagArea';
+import { unTrackedFiles, trackedButNotStaged } from './trackAndStagArea';
 import { command } from '../command';
 import { hexPen, randomPen } from 'color-pen';
+import { isEmptyString, isFalse } from 'a-type-of-js';
 
 /**
  *
@@ -11,14 +13,17 @@ import { hexPen, randomPen } from 'color-pen';
  *
  */
 export async function add() {
+  const { gitInfo } = dataStore;
   /**  查看 git 是否有未添加到暂存区的已修改文件  */
   const canAdd = await trackedButNotStaged();
 
   // 有文件修改或存在未追踪的文件，则添加到暂存区
-  if (canAdd.data !== '') {
-    await runOtherCode('git add .');
-  } else {
+  if (isEmptyString(canAdd.data)) {
     _p('工作区没有修改的已追踪的文件待添加到暂存区');
+  } else {
+    dog('将工作区已追踪的修改文件添加到暂存区', canAdd.data);
+    gitInfo.trackedChangedFiles = canAdd.data.split('\n');
+    await runOtherCode({ code: 'git add --update' });
   }
 }
 
@@ -27,24 +32,28 @@ export async function add() {
  * 检测 git 是否存在未追踪的文件
  *
  */
-export async function canTrack() {
+export async function manageUntrackedFile() {
+  const { gitInfo } = dataStore;
   /**  查看 git 是否存在未追踪的文件  */
-  const result = await notTrack();
+  const result = await unTrackedFiles();
 
-  dog(result);
-  if (result.success && result.data !== '') {
+  dog(result, result.data);
+  if (result.success && isFalse(isEmptyString(result.data))) {
     _p(hexPen('#f39')('当前工作区存在未追踪的文件 : \n'));
-    const notTrackFileStr = result
-      .data!.replace(/\n$/, '')
-      .split('\n')
-      .map(e => randomPen('- ').concat(e));
+    const untrackedFileList = (gitInfo.untrackedFiles = result.data
+      .replace(/\n$/, '')
+      .split('\n'));
+
+    const notTrackFileStr = untrackedFileList.map(e =>
+      randomPen('- ').concat(e),
+    );
     // 打印
     _p(notTrackFileStr.join('\n'));
     _p(' '); // 换行
     await addTrack(notTrackFileStr.length);
   }
 
-  if (!result.success) {
+  if (isFalse(result.success)) {
     dog.error('查看当前工作区是否存在文件时出错', result);
     return await gitError('查看当前工作区是否有文件出错');
   }

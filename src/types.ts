@@ -72,6 +72,14 @@ export interface DateStore {
      * 是否强制提交
      */
     force: boolean;
+    /**
+     * 未追踪的文件
+     */
+    untrackedFiles: string[];
+    /**
+     * 已追踪的修改文件（未在暂存区）
+     */
+    trackedChangedFiles: string[];
   };
   /**
    * 命令行参数，用户使用命令时携带的子命令或参数

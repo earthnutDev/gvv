@@ -1,6 +1,8 @@
+import { dog } from './../dog';
 import { runOtherCode } from 'a-node-tools';
 import { command } from '../command';
 import { gitError } from '../utils';
+import { isEmptyString } from 'a-type-of-js';
 
 /**
  * git 的账户
@@ -18,12 +20,14 @@ export async function gitUser() {
   });
 
   if (!localUserName.success || !globalUserName.success) {
-    await gitError(localUserName.error || globalUserName.error);
+    dog.error('未获取到 git 用户名配置', localUserName, globalUserName);
+    return await gitError(localUserName.error || globalUserName.error);
   }
 
   if ('' === localUserName.data && '' === globalUserName.data) {
-    await setUserName();
+    return await setUserName();
   }
+  dog('获取到本地个人信息', localUserName, globalUserName);
 }
 
 /**
@@ -39,12 +43,12 @@ export async function setUserName() {
     private: true,
   });
 
-  if (result) {
+  if (isEmptyString(result)) {
+    await gitError('用户名 🍀 不能为🈳');
+  } else {
     await runOtherCode({
       code: `git config --global user.name "${result}"`,
       printLog: false,
     });
-  } else {
-    await gitError('用户名 🍀 不能为🈳');
   }
 }

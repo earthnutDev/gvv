@@ -1,8 +1,10 @@
+import { dog } from './../dog';
 import { runOtherCode } from 'a-node-tools';
 
 import { gitError } from '../utils';
 import { trackedNotSubmitted } from './trackAndStagArea';
 import { getMessage } from './getMessage';
+import { isFalse } from 'a-type-of-js';
 
 /**
  *
@@ -17,10 +19,10 @@ export async function stagingArea() {
    */
   const canCommit = await trackedNotSubmitted();
 
-  if (canCommit.success !== true || canCommit.error !== '') {
-    await gitError('暂存区异常');
-  } else if (/^\n?\r?$/.test(canCommit.data || '')) {
-    await gitError('暂存区没有未提交的文件'); // 暂存区没有未提交的文件直接🖕使用
+  if (isFalse(canCommit.success)) {
+    return await gitError('暂存区异常');
+  } else if (/^\n?\r?$/.test(canCommit.data)) {
+    return await gitError('暂存区没有未提交的文件'); // 暂存区没有未提交的文件直接🖕使用
   }
 
   await commit(); // 提交代码到远程库
@@ -37,7 +39,8 @@ export async function commit() {
 
   const result = await runOtherCode({ code, printLog: false });
 
-  if (!result.success) {
-    await gitError('提交代码失败');
+  if (isFalse(result.success)) {
+    dog.error('暂存区文件提交异常', result.error);
+    return await gitError('提交代码失败');
   }
 }

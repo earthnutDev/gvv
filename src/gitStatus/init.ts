@@ -1,6 +1,6 @@
 import { dog } from './../dog';
 import { _p, runOtherCode } from 'a-node-tools';
-import { isString } from 'a-type-of-js';
+import { isString, isFalse } from 'a-type-of-js';
 import { greenPen } from 'color-pen';
 import { command } from '../command';
 import { gitError } from '../utils';
@@ -21,12 +21,15 @@ export async function gitInitialized() {
   if (status.success) {
     return;
   }
+  // git 未初始化
   if (
     isString(status.error) &&
     status.error.includes('fatal: not a git repository')
   ) {
+    dog('git 未初始化');
     await initializeGit();
   } else {
+    dog.error('查看 git 状态出错', status);
     await gitError('未知错误', status.error);
   }
 }
@@ -47,6 +50,7 @@ export async function initializeGit() {
     tip,
   });
 
+  // 用户选择退出
   if (result === tip[1]) {
     return command.end();
   }
@@ -67,7 +71,10 @@ export async function gitInit() {
     printLog: false,
   });
 
-  if (!gitInit.success) {
-    await gitError('初始化失败', gitInit.error);
+  if (isFalse(gitInit.success)) {
+    dog.error('初始化 git 失败', gitInit);
+    return await gitError('初始化失败', gitInit.error);
   }
+
+  dog(gitInit);
 }

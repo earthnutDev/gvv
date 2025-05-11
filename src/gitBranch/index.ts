@@ -12,6 +12,7 @@ import { dataStore } from '../data-store';
 import { getLocalBranch } from './getLocalBranch';
 import { getRemoteBranch } from './getRemoteBranch';
 import { hasRemote } from '../gitRemote';
+import { isEmptyString } from 'a-type-of-js';
 
 /**
  *
@@ -27,9 +28,9 @@ export async function gitBranch(): Promise<void> {
   // 获取远端分支信息
   await getRemoteBranch();
 
-  //  当两者🀄️的任一个没有值，说明为设置默认推送关联分支
+  //  当两者🀄️的任一个没有值，说明未设置默认推送关联分支
   // 两个值同时在  `getRemoteBranch` 🀄️ 配置，没有值意味着并没有配置默认推送的
-  if ('' === gitInfo.alias || '' === gitInfo.branch) {
+  if (isEmptyString(gitInfo.alias) || isEmptyString(gitInfo.branch)) {
     await hasRemote(); // 验证远端库是否配置
   }
 }

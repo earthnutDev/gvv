@@ -1,3 +1,4 @@
+import { dog } from './../dog';
 import {
   getDirectoryBy,
   PackageJson,
@@ -19,6 +20,7 @@ export async function getVersion() {
   const packageJsonDir = getDirectoryBy('package.json', 'file');
 
   if (isUndefined(packageJsonDir)) {
+    dog.error('查找 package.json 文件出错');
     return await gitError('未找到 package.json 文件');
   }
 
@@ -26,9 +28,10 @@ export async function getVersion() {
 
   const packageJson = readFileToJsonSync<PackageJson>(path);
 
-  const v = packageJson?.version || '';
+  const version = packageJson?.version || '';
+  dog(`获取到的版本号为 <${version}>`);
 
-  pkg.version = v;
+  pkg.version = version;
 
-  dataStore.tag = commandParameters.tag = gitInfo.tag = `v${v}`;
+  dataStore.tag = commandParameters.tag = gitInfo.tag = `v${version}`;
 }

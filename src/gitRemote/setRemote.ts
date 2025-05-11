@@ -1,6 +1,7 @@
 import { runOtherCode } from 'a-node-tools';
 import { dataStore } from '../data-store';
 import { gitError } from '../utils';
+import { isFalse } from 'a-type-of-js';
 
 /**
  *
@@ -16,7 +17,7 @@ export async function setRemote() {
     printLog: false,
   });
 
-  if (!result.success) {
+  if (isFalse(result.success)) {
     await gitError(result.error);
   }
 }

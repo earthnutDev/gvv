@@ -1,3 +1,4 @@
+import { isFalse } from 'a-type-of-js';
 import { command } from './command';
 import { dataStore } from './data-store';
 import { dog } from './dog';
@@ -30,18 +31,20 @@ export async function main(): Promise<void> {
     await gitInit();
     command.end(); // 结束命令行
   }
-  dog(dataStore);
   await gitExist(); // 判断当前项目是否是 git 项目
+
   await gitBranch(); // 获取当前的分支情况
 
-  if (commandParameters.tag !== false) {
+  if (!isFalse(commandParameters.tag)) {
+    dog('设置当前提交的 tag');
     await checkTags();
   }
-  // await gitStatus(); // 获取 git 状态
+  await gitStatus(); // 获取 git 状态并进行提交
 
   // 用户主动使用 `-t` 或 `tag` 标签时或未传入该值而 `kind` 为 `version` 值时，为本次提交进行打标签
-  if (commandParameters.tag !== false) {
+  if (!isFalse(commandParameters.tag)) {
     await tag(); // 打标签
   }
+
   await push();
 }

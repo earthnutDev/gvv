@@ -1,5 +1,6 @@
+import { dog } from './../dog';
 import { runOtherCode } from 'a-node-tools';
-import { isString } from 'a-type-of-js';
+import { isString, isFalse, isEmptyString } from 'a-type-of-js';
 import { dataStore } from '../data-store';
 import { gitError } from '../utils';
 
@@ -19,7 +20,8 @@ export async function getRemoteBranch() {
   });
 
   /**  获取远程分支信息 ❌  */
-  if (!result.success) {
+  if (isFalse(result.success)) {
+    dog.error('获取本地分支关联的远程分支出错', result);
     /**  未设置远程分支  */
     if (
       isString(result.error) &&
@@ -31,18 +33,18 @@ export async function getRemoteBranch() {
       return await gitError(result.error);
     }
   }
-
+  dog('获取当前分支关联的远程分支', result);
   /**  获取远程分支信息 ✅  */
-  const remoteBranch = result.data!.trim();
+  const remoteBranch = result.data!.trim().replace(/\n/g, '');
   /**  分割远程分支信息  */
   const tip = remoteBranch.indexOf('/');
 
   /**  配置远程库的别名，该值为🈳（用户未主动配置该值）时，则设置该值  */
-  if (gitInfo.alias === '') {
+  if (isEmptyString(gitInfo.alias)) {
     gitInfo.alias = remoteBranch.slice(0, tip);
   }
   /**  配置远程分支名，该值为🈳（用户未主动配置该值）时，则设置该值  */
-  if (gitInfo.branch === '') {
+  if (isEmptyString(gitInfo.branch)) {
     gitInfo.branch = remoteBranch.slice(tip + 1);
   }
 

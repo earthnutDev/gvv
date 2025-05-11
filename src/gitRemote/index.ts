@@ -17,6 +17,7 @@ import { setRemote } from './setRemote';
 import { getRemote } from './getRemote';
 import { dataStore } from '../data-store';
 import { verifyRemoteUrl } from './verifyRemoteUrl';
+import { isEmptyString } from 'a-type-of-js';
 
 /**
  *
@@ -28,7 +29,7 @@ export async function hasRemote() {
   await getRemote();
 
   /**  未关联远程分支（或是本地为未设置任何远程库）  */
-  if ('' === gitInfo.alias) {
+  if (isEmptyString(gitInfo.alias)) {
     await waitInputRemoteAlias(); // 设置远程分支的别名
     await waitInputRemoteUrl(); // 设置远程分支的 url
 

@@ -1,3 +1,4 @@
+import { isFalse } from 'a-type-of-js';
 import { dog } from './../dog';
 import { runOtherCode } from 'a-node-tools';
 import { dataStore } from '../data-store';
@@ -17,7 +18,7 @@ export async function verifyRemoteUrl() {
 
   dog('校验当前远程仓库地址的正确性 ', result);
 
-  if (!result.success) {
+  if (isFalse(result.success)) {
     dog.error('校验当前远程仓库地址的正确性', result.error);
     return await gitError(result.error);
   }

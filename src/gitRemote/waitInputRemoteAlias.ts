@@ -3,6 +3,7 @@ import { brightYellowPen } from 'color-pen';
 import { command } from '../command';
 import { dataStore } from '../data-store';
 import { gitError } from '../utils';
+import { isEmptyString } from 'a-type-of-js';
 
 /**
  *
@@ -14,7 +15,7 @@ export async function waitInputRemoteAlias() {
 
   // 这里以 commandParameters.alias 与 gitInfo.alias 为判断依据
   // 但实际在代码执行流程到这里 gitInfo.alias 一定为 ''
-  if (commandParameters.alias !== '' && gitInfo.alias === '') {
+  if (!isEmptyString(commandParameters.alias) && isEmptyString(gitInfo.alias)) {
     gitInfo.alias = commandParameters.alias;
     _p(
       `已自动配置远程分支的别名为 🛠️ ${brightYellowPen(commandParameters.alias)}`,
@@ -32,7 +33,7 @@ export async function waitInputRemoteAlias() {
     required: false,
   });
 
-  if (result === '') {
+  if (isEmptyString(result)) {
     return await gitError('远程分支的别名不能为🈳');
   }
 

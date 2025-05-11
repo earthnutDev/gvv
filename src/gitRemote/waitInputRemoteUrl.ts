@@ -2,6 +2,7 @@ import { _p } from 'a-node-tools';
 import { command } from '../command';
 import { dataStore } from '../data-store';
 import { gitError } from '../utils';
+import { isEmptyString } from 'a-type-of-js';
 
 /**
  *
@@ -18,7 +19,7 @@ export async function waitInputRemoteUrl() {
     tip: 'git@',
   });
 
-  if (result === '') {
+  if (isEmptyString(result)) {
     return await gitError('远程分支的链接不能为🈳');
   }
 

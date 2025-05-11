@@ -12,7 +12,6 @@ else
   exit 1
 fi
 
-
 if ! npm run build; then 
   echo "构建失败" 
   exit 1

@@ -19,7 +19,7 @@ import { runOtherCode } from 'a-node-tools';
  * 未追踪的文件
  *
  */
-export async function notTrack() {
+export async function unTrackedFiles() {
   return await runOtherCode({
     code: 'git ls-files --others --exclude-standard',
     printLog: false,

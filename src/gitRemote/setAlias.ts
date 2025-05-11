@@ -2,6 +2,7 @@ import { _p } from 'a-node-tools';
 import { italicPen, pen } from 'color-pen';
 
 import { dataStore } from '../data-store';
+import { isTrue } from 'a-type-of-js';
 
 /**
  *
@@ -13,7 +14,7 @@ import { dataStore } from '../data-store';
  */
 export function setAlias(currentAlias: string, cover: boolean = false) {
   const { gitInfo } = dataStore;
-  if (cover) {
+  if (isTrue(cover)) {
     const message = (
       gitInfo.alias ? `未找到远程库别名为 ${gitInfo.alias} 的远程库，` : '当前'
     ).concat(
