@@ -23,7 +23,7 @@ export async function getRemote() {
   });
   dog('获取远端的库信息', code, result);
   // 获取远程仓库信息 ❌
-  if (!result.success) {
+  if (!result.success || !result.data) {
     dog.error('未获取远程仓库', result);
     await gitError(result.error);
   }

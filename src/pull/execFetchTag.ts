@@ -12,6 +12,10 @@ import { gitError } from '../utils';
 export async function execFetchTag() {
   const { alias } = dataStore.gitInfo;
 
+  if (!alias) {
+    return await gitError(`使用别名获取远端的标签`);
+  }
+
   const code = `git fetch ${alias} --tags`;
   const result = await runOtherCode({
     code,

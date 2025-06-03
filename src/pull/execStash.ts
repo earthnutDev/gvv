@@ -23,6 +23,7 @@ export async function execStash() {
 
   if (result.data.startsWith('No local changes to save')) {
     gitInfo.stashed = false; // 本地没有更改需要需要暂存的文件
+    return await gitError('本地貌似没有文件变更');
   } else {
     gitInfo.stashed = true; // 暂存已修改的文件已方便拉取线上分支
   }

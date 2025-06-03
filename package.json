@@ -13,7 +13,7 @@
     "eslint": "eslint src",
     "prettier": "prettier . --write",
     "push:version": "npm run build && node dist/bin.mjs kind=version",
-    "push:submit": "npm run build && node dist/bin.mjs kind=submit",
+    "gvv": "npm run build && node dist/bin.mjs",
     "test": "jja cls && lint-staged && jest --coverage",
     "vjj": "jja cls && vjj",
     "prepublishOnly": "jja cls && pjj",
@@ -21,10 +21,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@qqi/dev-log": "^1.0.1",
-    "a-command": "^2.2.5",
+    "@qqi/dev-log": "^1.0.2",
+    "a-command": "^2.3.0",
     "a-js-tools": "^1.0.0",
-    "a-node-tools": "^4.2.3",
+    "a-node-tools": "^4.2.4",
     "a-type-of-js": "^1.0.1",
     "color-pen": "^2.0.10"
   },
@@ -36,8 +36,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.28.0",
-    "@qqi/check-version": "^1.0.0",
-    "@qqi/rollup-external": "^1.0.0",
+    "@qqi/check-version": "^1.0.1",
+    "@qqi/rollup-external": "^1.0.1",
     "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
@@ -59,7 +59,7 @@
     "ts-jest": "^29.3.4",
     "tslib": "^2.8.1",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.33.0",
+    "typescript-eslint": "^8.33.1",
     "vjj": "^1.0.2"
   }
 }
