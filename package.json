@@ -1,7 +1,7 @@
 {
   "name": "gvv",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "description": "一键 git 提交: git add + git commit + git push",
   "scripts": {
