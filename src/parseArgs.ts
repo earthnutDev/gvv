@@ -1,4 +1,4 @@
-import { isUndefined } from 'a-type-of-js';
+import { isFalse, isUndefined } from 'a-type-of-js';
 import { command } from './command';
 import { dataStore } from './data-store';
 import { dog } from './dog';
@@ -61,8 +61,9 @@ export function parseArgs(): void {
     commandParameters.message = [...dataStore.message];
   }
 
+  const force = argsMap.force;
   // 是否为强制推送
-  if (argsMap['force']) {
+  if (force && force.value && !isFalse(force.value[0])) {
     commandParameters.force = dataStore.gitInfo.force = true;
   }
 

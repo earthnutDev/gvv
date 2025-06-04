@@ -19,7 +19,9 @@ export default {
     },
   ],
   // 配置需要排除的包
-  external: external(),
+  external: external({
+    include: ['src/command', 'src/utils'],
+  }),
   plugins: [
     resolve(),
     commonjs(),

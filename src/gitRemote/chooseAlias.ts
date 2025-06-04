@@ -9,12 +9,19 @@ import { isEmptyString, isUndefined } from 'a-type-of-js';
  * 选择一个远程库别名
  *
  */
-export async function chooseAlias(tip: string[]) {
-  const result = await command.question({
-    text: '请选择一个远程库别名',
+export async function chooseAlias(remoteAliases: { [x: string]: string }) {
+  //  存在多个远端代码库的别名且都不包含主动设置的值时采用问询的方式设置值
+
+  const remoteList = Object.keys(remoteAliases);
+
+  const result = await command.selection({
+    info: '当前存在多个远程库配置',
     resultText: '本次推送选择的远程分支为',
-    tip,
-    required: true,
+    data: remoteList.map(e => ({
+      label: e,
+      value: e,
+      tip: `${e} : ${remoteAliases[e]}`,
+    })),
   });
 
   if (isUndefined(result)) {

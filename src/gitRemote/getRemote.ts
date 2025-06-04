@@ -5,7 +5,7 @@ import { gitError } from '../utils';
 import { parseRemoteAlias } from './parseRemoteAlias';
 import { chooseAlias } from './chooseAlias';
 import { setAlias } from './setAlias';
-import { cyanPen, magentaPen } from 'color-pen';
+import { magentaPen } from 'color-pen';
 import { commandParameters } from '../data-store/commandParameters';
 import { gitInfo } from '../data-store/gitInfo';
 
@@ -58,10 +58,7 @@ export async function getRemote() {
       // 如果只有一个远程库，则直接设置别名
       return setAlias(remoteList[0], true);
     } else {
-      //  存在多个远端代码库的别名且都不包含主动设置的值时采用问询的方式设置值
-      _p('当前存在多个远程库配置：');
-      remoteList.forEach(e => _p(`${cyanPen(e)} ${remoteAliases[e]}`));
-      return await chooseAlias(remoteList);
+      return await chooseAlias(remoteAliases);
     }
   }
 }

@@ -1,4 +1,10 @@
-import { cyanPen, greenPen, magentaPen } from 'color-pen';
+import {
+  brightCyanPen,
+  brightGreenPen,
+  cyanPen,
+  greenPen,
+  magentaPen,
+} from 'color-pen';
 import { isFalse } from 'a-type-of-js';
 import { dog } from './../dog';
 import { _p, runOtherCode } from 'a-node-tools';
@@ -15,7 +21,7 @@ export async function push() {
   /**  推送的实际分支  */
   const pushBrach = branch || localBranch;
   /**  执行的 shell 命令  */
-  const code = `git push ${alias} ${localBranch}:${pushBrach} ${force ? '--force' : ''} --tag`;
+  const code = `git push ${alias} ${localBranch}:${pushBrach} --tag ${force ? '--force' : ''}`;
 
   const result = await runOtherCode({
     code,
@@ -39,5 +45,7 @@ export async function push() {
   gitInfo.tagged = false;
   gitInfo.committed = false;
 
-  _p('🎉🎉 完结 🎉🎉 撒花 🎉🎉');
+  _p(
+    `已经本地的修改推送到 ${brightGreenPen(alias)}/${brightCyanPen(pushBrach)}`,
+  );
 }

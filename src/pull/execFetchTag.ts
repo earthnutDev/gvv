@@ -3,6 +3,7 @@ import { isFalse } from 'a-type-of-js';
 import { dataStore } from '../data-store';
 import { runOtherCode } from 'a-node-tools';
 import { gitError } from '../utils';
+import { brightRedPen, redPen } from 'color-pen';
 
 /**
  *
@@ -13,7 +14,7 @@ export async function execFetchTag() {
   const { alias } = dataStore.gitInfo;
 
   if (!alias) {
-    return await gitError(`使用别名获取远端的标签`);
+    return await gitError(`别名获取远端的标签不存在`);
   }
 
   const code = `git fetch ${alias} --tags`;
@@ -27,9 +28,13 @@ export async function execFetchTag() {
   dog('执行拉起线上标签', code, result);
 
   if (isFalse(result.success)) {
-    const message = '拉取线上 <' + alias + '> 的 tag出错';
-    dog.error(message, result);
+    if (/fatal:\s*repository\s*'.*'\s*not\s*found/i.test(result.error)) {
+      const url = result.error.replace(/^.*['"](.*)['"].*\n$/im, '$1');
 
-    return await gitError(message, result.error);
+      const message = `远端别名 ${redPen(alias)} 对应的地址 ${brightRedPen(url)} 不存在`;
+      return await gitError(message);
+    }
+    const message = '拉取线上 <' + alias + '> 的 tag出错';
+    return await gitError(message, brightRedPen(result.error));
   }
 }

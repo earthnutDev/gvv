@@ -1,4 +1,4 @@
-import { isEmptyArray, isTrue } from 'a-type-of-js';
+import { isEmptyArray } from 'a-type-of-js';
 import { dataStore } from '../data-store';
 import { now } from '../utils';
 
@@ -9,7 +9,7 @@ import { now } from '../utils';
  */
 export function getMessage(withVersion: boolean = false) {
   const { kind, message, pkg, tag } = dataStore;
-  const version = withVersion && isTrue(tag) ? `${pkg.version}` : '';
+  const version = withVersion && tag ? `${pkg.version ?? ''}` : '';
   const time = now();
   const result = isEmptyArray(message)
     ? ''
