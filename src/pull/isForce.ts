@@ -14,7 +14,7 @@ export async function isForce(): Promise<boolean> {
     return false;
   }
 
-  const result = await command.selection({
+  const result = await command.selection<number>({
     info: '您启用了强制推送，为了安全劳烦再次确认',
     data: [
       {
@@ -35,9 +35,9 @@ export async function isForce(): Promise<boolean> {
     ],
   });
 
-  if (isUndefined(result) || Number(result) === 2) {
+  if (isUndefined(result) || result === 2) {
     return await gitError('好的，您选择了退出，正在做退出前最后的处理');
   }
 
-  return Number(result) === 0;
+  return result === 0;
 }
