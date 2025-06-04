@@ -17,6 +17,7 @@ export async function waitInputRemoteUrl() {
     text: '请 🔧 配置远程分支的链接',
     resultText: '设置远程分支的链接为',
     tip: 'git@',
+    private: false,
   });
 
   if (isUndefined(result)) {

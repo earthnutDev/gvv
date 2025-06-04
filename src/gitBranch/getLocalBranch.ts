@@ -34,10 +34,7 @@ export async function getLocalBranch() {
   // 或者 git rev-parse --abbrev-ref HEAD
   const code = 'git branch --show-current';
   /**  获取本地的分支信息  */
-  const result = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const result = await runOtherCode(code);
 
   dog('获取分支信息', code, result);
 

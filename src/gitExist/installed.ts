@@ -10,7 +10,7 @@ import { gitError } from '../utils';
  */
 export async function gitInstalled() {
   const code = 'git -h';
-  const result = await runOtherCode({ code, printLog: false });
+  const result = await runOtherCode(code);
 
   dog('当前 git 安装情况', code, result);
 

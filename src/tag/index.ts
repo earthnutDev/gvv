@@ -27,10 +27,7 @@ export async function tag() {
     code = `git tag -a ${tag} -m "${message}" `;
   }
 
-  const result = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const result = await runOtherCode(code);
 
   dog('执行打标签的代码为 <', code, result);
   if (isFalse(result.success)) {

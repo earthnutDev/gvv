@@ -22,10 +22,7 @@ import { runOtherCode } from 'a-node-tools';
  */
 export async function unTrackedFiles() {
   const code = 'git ls-files --others --exclude-standard';
-  const result = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const result = await runOtherCode(code);
   dog('未追踪的文件列表', code, result);
   return result;
 }
@@ -36,10 +33,7 @@ export async function unTrackedFiles() {
  */
 export async function trackFile() {
   const code = 'git ls-files';
-  const result = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const result = await runOtherCode(code);
   dog('已追踪的文件列表', code, result);
   return result;
 }
@@ -55,10 +49,7 @@ export async function trackFile() {
  */
 export async function ignoreFileList() {
   const code = 'git ls-files --others';
-  const result = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const result = await runOtherCode(code);
   dog('添加到 .gitignore 的文件', code, result);
   return result;
 }
@@ -70,7 +61,7 @@ export async function ignoreFileList() {
  */
 export async function trackedButNotStaged() {
   const code = 'git diff --name-only';
-  const result = await runOtherCode({ code, printLog: false });
+  const result = await runOtherCode(code);
   dog('判断当前是否有未添加到暂存区的已（追踪）修改文件', code, result);
 
   return result;
@@ -83,10 +74,7 @@ export async function trackedButNotStaged() {
  */
 export async function trackedNotSubmitted() {
   const code = 'git diff --cached --name-only';
-  const result = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const result = await runOtherCode(code);
 
   dog('判断当前文件夹是否有已添加到暂存区的未提交的文件', code, result);
   return result;

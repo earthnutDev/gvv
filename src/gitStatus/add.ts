@@ -31,7 +31,7 @@ export async function add() {
     }
     const code = 'git add --update';
     // 将本地未添加追踪的文件添加追踪（将直接放置到暂存区中）
-    const result = await runOtherCode({ code, printLog: false });
+    const result = await runOtherCode(code);
     dog('判断当前是否存在尚未添加到暂存区的已追踪的修改文件', code, result);
   }
 }
@@ -78,13 +78,12 @@ async function addTrack(notTrackLength: number) {
   const result = await command.question({
     text: `存在 ${notTrackLength} 个${hexPen('#990')('未追踪')}的文件，是否继续？`,
     tip,
-    private: true,
   });
 
   /// 继续
   if (result === tip[0]) {
     const code = 'git add .';
-    const _result = await runOtherCode({ code, printLog: false });
+    const _result = await runOtherCode(code);
     dog('是否将未追踪的文件添加到追踪区', result, code, _result);
   } else {
     // 退出

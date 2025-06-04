@@ -14,10 +14,7 @@ import { dog } from '../dog';
 export async function setRemote() {
   const { gitInfo } = dataStore;
   const code = `git remote add ${gitInfo.alias} ${gitInfo.url}`;
-  const result = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const result = await runOtherCode(code);
   dog('配置远程库', code, result);
 
   if (isFalse(result.success)) {

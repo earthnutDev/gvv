@@ -19,7 +19,6 @@ export async function execFetchTag() {
   const code = `git fetch ${alias} --tags`;
   const result = await runOtherCode({
     code,
-    printLog: false,
     waiting: {
       prefix: 1,
       info: '正在拉取线上 tag 数据',

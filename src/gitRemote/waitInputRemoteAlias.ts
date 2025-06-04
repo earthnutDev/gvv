@@ -31,6 +31,7 @@ export async function waitInputRemoteAlias() {
     resultText: '设置远程分支的别名为',
     tip: 'origin',
     required: false,
+    private: false,
   });
 
   if (isUndefined(result)) {

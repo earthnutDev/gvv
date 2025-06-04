@@ -10,10 +10,7 @@ import { gitInfo } from '../data-store/gitInfo';
 export async function execStash() {
   const code = `git stash save -u 'work in progress'`;
 
-  const result = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const result = await runOtherCode(code);
 
   dog('将当前文件放置到储存区', code, result);
 

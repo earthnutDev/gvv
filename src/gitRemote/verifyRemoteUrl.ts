@@ -12,10 +12,7 @@ import { gitError } from '../utils';
 export async function verifyRemoteUrl() {
   const { gitInfo } = dataStore;
   const code = `git ls-remote --heads ${gitInfo.url}`;
-  const result = await runOtherCode({
-    code: `git ls-remote --heads ${gitInfo.url}`,
-    printLog: false,
-  });
+  const result = await runOtherCode(code);
 
   dog('校验当前远程仓库地址的正确性 ', code, result);
 

@@ -17,10 +17,7 @@ import { gitInfo } from '../data-store/gitInfo';
 export async function getRemote() {
   const code = 'git remote -v';
   /**  获取远程仓库信息  */
-  const result = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const result = await runOtherCode(code);
   dog('获取远端的库信息', code, result);
   // 获取远程仓库信息 ❌
   if (!result.success || !result.data) {
@@ -59,7 +56,7 @@ export async function getRemote() {
 
     if (remoteNumber === 1) {
       // 如果只有一个远程库，则直接设置别名
-      return setAlias(remoteAliases[0], true);
+      return setAlias(remoteList[0], true);
     } else {
       //  存在多个远端代码库的别名且都不包含主动设置的值时采用问询的方式设置值
       _p('当前存在多个远程库配置：');

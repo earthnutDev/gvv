@@ -18,7 +18,6 @@ export async function execFetchBranch() {
   const result = await runOtherCode({
     // code: `git fetch ${alias}  ${fetchBrach}`,
     code,
-    printLog: false,
     waiting: {
       info: '请稍等，正在同步线上数据',
       prefix: 0,

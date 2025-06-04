@@ -12,10 +12,7 @@ import { gitError } from '../utils';
  */
 export async function gitInitialized() {
   const code = 'git status';
-  const status = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const status = await runOtherCode(code);
 
   dog('gitStatus: ', code, status);
 
@@ -74,10 +71,7 @@ export async function initializeGit() {
  */
 export async function gitInit() {
   const code = 'git init';
-  const result = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const result = await runOtherCode(code);
 
   dog('执行 git init', code, result);
   if (isFalse(result.success)) {

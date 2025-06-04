@@ -14,7 +14,6 @@ export async function chooseAlias(tip: string[]) {
     text: '请选择一个远程库别名',
     resultText: '本次推送选择的远程分支为',
     tip,
-    private: true,
     required: true,
   });
 

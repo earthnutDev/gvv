@@ -19,7 +19,6 @@ export async function push() {
 
   const result = await runOtherCode({
     code,
-    printLog: true,
     waiting: `正在将本地 ${greenPen(localBranch)} 推送到 ${magentaPen(alias)} 的 ${cyanPen(pushBrach)} `,
   });
   dog('执行推送的代码为：', code, result);

@@ -20,10 +20,7 @@ export async function checkTags() {
   }
   const code = 'git tag --list';
   // 获取本地的 tag 值列表
-  const result = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const result = await runOtherCode(code);
 
   dog('获取本地的标签', code, result);
 

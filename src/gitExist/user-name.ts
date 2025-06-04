@@ -10,18 +10,12 @@ import { isEmptyString, isUndefined } from 'a-type-of-js';
 export async function gitUser() {
   let code = 'git config user.name';
   /**  本地仓库的用户名  */
-  const localUserName = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const localUserName = await runOtherCode(code);
   dog('本地仓库的用户名', code, localUserName);
 
   code = 'git config --global user.name';
   /**  全局的用户名  */
-  const globalUserName = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const globalUserName = await runOtherCode(code);
   dog('全局配置的用户名', code, globalUserName);
   if (!localUserName.success || !globalUserName.success) {
     dog.error('未获取到 git 用户名配置', localUserName, globalUserName);
@@ -44,7 +38,6 @@ export async function setUserName() {
     text: '请 🔧 配置您的 git 的用户名',
     tip: 'user.name',
     resultText: '您配置的 git 用户名是',
-    private: true,
   });
 
   if (isUndefined(username)) {
@@ -55,10 +48,7 @@ export async function setUserName() {
     await gitError('用户名 🍀 不能为🈳');
   } else {
     const code = `git config --global user.name "${username}"`;
-    const result = await runOtherCode({
-      code,
-      printLog: false,
-    });
+    const result = await runOtherCode(code);
     dog('配置全局的用户名', username, code, result);
   }
 }

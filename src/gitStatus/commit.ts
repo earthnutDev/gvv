@@ -39,7 +39,7 @@ export async function commit() {
   /**  构建提交的代码  */
   const code = `git commit -m "${getMessage(true)}"`;
 
-  const result = await runOtherCode({ code, printLog: false });
+  const result = await runOtherCode(code);
 
   dog('提交代码', code, result);
 

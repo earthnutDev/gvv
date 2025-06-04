@@ -15,7 +15,6 @@ export async function execMerge() {
   const code = `git merge  ${alias}/${mergeBrach}`;
   const result = await runOtherCode({
     code,
-    printLog: false,
     waiting: '请等待代码合并',
   });
   dog('合并分支', code, result);

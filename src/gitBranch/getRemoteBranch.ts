@@ -16,10 +16,7 @@ export async function getRemoteBranch() {
   /**
    * 获取远程当前分支名的分支信息
    */
-  const result = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const result = await runOtherCode(code);
 
   dog('获取远程当前分支的信息', code, result);
 

@@ -10,17 +10,11 @@ import { isEmptyString, isFalse, isUndefined } from 'a-type-of-js';
 export async function gitUserEmail() {
   let code = 'git config user.email';
   /**  本地仓库的用户名  */
-  const localUserEmail = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const localUserEmail = await runOtherCode(code);
   dog('本地仓库的名', code, localUserEmail);
   code = 'git config --global user.email';
   /**  全局的用户名  */
-  const globalUserEmail = await runOtherCode({
-    code,
-    printLog: false,
-  });
+  const globalUserEmail = await runOtherCode(code);
 
   dog('全局仓库的邮箱', code, globalUserEmail);
   if (isFalse(localUserEmail.success) || isFalse(globalUserEmail.success)) {
@@ -61,10 +55,7 @@ export async function setUserEmail() {
     await gitError('邮箱 📮 不能为🈳');
   } else {
     const code = `git config --global user.email "${email}"`;
-    const result = await runOtherCode({
-      code,
-      printLog: false,
-    });
+    const result = await runOtherCode(code);
     dog('设置用户的名', email, code, result);
   }
 }
