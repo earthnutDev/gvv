@@ -1,7 +1,9 @@
 import { isFalse, isUndefined } from 'a-type-of-js';
 import { command } from './command';
 import { dataStore } from './data-store';
-import { dog } from './dog';
+import { dog, dun } from './dog';
+import { getMessage } from './gitStatus/getMessage';
+import { getVersion } from './tag/getVersion';
 
 /**
  *
@@ -83,5 +85,11 @@ export function parseArgs(): void {
     commandParameters.branch = branch.value[0].toString();
   }
 
-  dog('参数解析完毕', dataStore);
+  if (!dun) {
+    getVersion();
+    dog('参数解析完毕', dataStore);
+    dog('tag 使用消息', getMessage());
+    dog('推送使用消息', getMessage(true));
+    // command.error();
+  }
 }
