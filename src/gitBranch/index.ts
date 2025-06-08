@@ -30,7 +30,7 @@ export async function gitBranch(): Promise<void> {
 
   //  当两者🀄️的任一个没有值，说明未设置默认推送关联分支
   // 两个值同时在  `getRemoteBranch` 🀄️ 配置，没有值意味着并没有配置默认推送的
-  if (isEmptyString(gitInfo.alias) || isEmptyString(gitInfo.branch)) {
+  if ([gitInfo.alias, gitInfo.branch].some(e => isEmptyString(e))) {
     await hasRemote(); // 验证远端库是否配置
   }
 }

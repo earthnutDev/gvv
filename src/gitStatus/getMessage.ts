@@ -23,7 +23,7 @@ export function getMessage(withTag: boolean = false) {
     : message.length === 1
       ? message[0]
       : message
-          .map(e => '\n- '.concat(e.toString()))
+          .map(e => '\n - '.concat(e.toString()))
           .join('')
           .replace(/"/, "'");
 

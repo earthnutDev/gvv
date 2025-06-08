@@ -21,7 +21,7 @@ export async function push() {
   /**  推送的实际分支  */
   const pushBrach = branch || localBranch;
   /**  执行的 shell 命令  */
-  const code = `git push ${alias} ${localBranch}:${pushBrach} --tag ${force ? '--force' : ''}`;
+  const code = `git push ${alias} ${localBranch}:${pushBrach} --tags ${force ? '--force' : ''}`;
 
   const result = await runOtherCode({
     code,

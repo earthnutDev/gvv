@@ -2,9 +2,7 @@ import typescript from '@rollup/plugin-typescript';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
-
-/** 配置需要不打包进生产包的包名配置  */
-const excludedPkg = ['node:', 'a-', 'color-pen'];
+import { external } from '@qqi/rollup-external';
 
 /** 生成  npm 文件的打包配置文件 */
 export default {
@@ -20,7 +18,9 @@ export default {
     },
   ],
   // 配置需要排除的包
-  external: id => new RegExp('^'.concat(excludedPkg.join('|^'))).test(id),
+  external: external({
+    ignore: ['src/data-store'],
+  }),
   plugins: [
     resolve(),
     commonjs(),

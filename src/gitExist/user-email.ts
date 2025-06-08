@@ -17,7 +17,7 @@ export async function gitUserEmail() {
   const globalUserEmail = await runOtherCode(code);
 
   dog('全局仓库的邮箱', code, globalUserEmail);
-  if (isFalse(localUserEmail.success) || isFalse(globalUserEmail.success)) {
+  if ([localUserEmail.success, globalUserEmail.success].some(e => isFalse(e))) {
     dog.error(
       '获取用户本地的 git 的邮箱配置失败',
       localUserEmail,
@@ -27,8 +27,7 @@ export async function gitUserEmail() {
   }
 
   if (
-    isEmptyString(localUserEmail.data) &&
-    isEmptyString(globalUserEmail.data)
+    [localUserEmail.data, globalUserEmail.data].every(e => isEmptyString(e))
   ) {
     return await setUserEmail();
   }

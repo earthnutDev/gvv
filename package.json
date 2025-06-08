@@ -1,14 +1,14 @@
 {
   "name": "gvv",
   "type": "module",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "description": "一键 git 提交: git add + git commit + git push",
   "scripts": {
     "beautify": "npm run eslint && npm run prettier",
     "build": "jja cls rm dist && rollup --config rollup.config.js && npm run clean:package",
     "clean:package": "node scripts/clean-package-json.js",
-    "dev": "npm run build &&GVV_DEV=all node --trace-warnings dist/bin.mjs",
+    "dev": "npm run build &&gvv_dev=false node --trace-warnings dist/bin.mjs",
     "diff": "jja pkg -d",
     "eslint": "eslint src",
     "prettier": "prettier . --write",
@@ -21,8 +21,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@qqi/dev-log": "^1.0.2",
-    "a-command": "^2.3.3",
+    "@qqi/dev-log": "^1.0.3",
+    "a-command": "^2.3.6",
     "a-js-tools": "^1.0.0",
     "a-node-tools": "^4.2.5",
     "a-type-of-js": "^1.0.1",
@@ -49,17 +49,17 @@
     "eslint-plugin-jsdoc": "^50.7.1",
     "globals": "^16.2.0",
     "husky": "^9.1.7",
-    "jja": "^2.3.6",
+    "jja": "^2.3.7",
     "lint-staged": "^16.1.0",
     "pjj": "^1.0.0",
     "prettier": "^3.5.3",
-    "rollup": "^4.41.1",
+    "rollup": "^4.42.0",
     "rollup-plugin-cleanup": "^3.2.1",
     "rollup-plugin-copy": "^3.5.0",
     "ts-jest": "^29.3.4",
     "tslib": "^2.8.1",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.33.1",
-    "vjj": "^1.0.3"
+    "vjj": "^1.0.4"
   }
 }

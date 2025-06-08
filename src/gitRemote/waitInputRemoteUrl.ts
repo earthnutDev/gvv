@@ -24,7 +24,7 @@ export async function waitInputRemoteUrl() {
     return await gitError('您选择了退出，即将退出');
   }
 
-  if (isEmptyString(result) || isUndefined(result)) {
+  if ([isEmptyString, isUndefined].some(e => e(result))) {
     return await gitError('远程分支的链接不能为🈳');
   }
 

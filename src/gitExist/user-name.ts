@@ -2,7 +2,11 @@ import { dog } from './../dog';
 import { runOtherCode } from 'a-node-tools';
 import { command } from '../command';
 import { gitError } from '../utils';
-import { isEmptyString, isUndefined } from 'a-type-of-js';
+import {
+  isEmptyString,
+  isUndefined,
+  isBusinessEmptyString,
+} from 'a-type-of-js';
 
 /**
  * git 的账户
@@ -22,7 +26,11 @@ export async function gitUser() {
     return await gitError(localUserName.error || globalUserName.error);
   }
 
-  if ('' === localUserName.data && '' === globalUserName.data) {
+  if (
+    [localUserName.data, globalUserName.data].every(e =>
+      isBusinessEmptyString(e),
+    )
+  ) {
     return await setUserName();
   }
   dog('获取到本地个人信息', localUserName, globalUserName);

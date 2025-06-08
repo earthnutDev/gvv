@@ -33,9 +33,7 @@ export async function gitError(...error: string[]): Promise<never> {
 
   /**  都为空则显示 1s 的延迟  */
   if (
-    isFalse(gitInfo.stashed) &&
-    isFalse(gitInfo.tagged) &&
-    isFalse(gitInfo.committed)
+    [gitInfo.stashed, gitInfo.tagged, gitInfo.committed].every(e => isFalse(e))
   ) {
     await sleep(1259);
   }

@@ -5,7 +5,7 @@ import {
   pathJoin,
   readFileToJsonSync,
 } from 'a-node-tools';
-import { isUndefined } from 'a-type-of-js';
+import { isFalse, isUndefined } from 'a-type-of-js';
 import { dataStore } from '../data-store';
 import { gitError } from '../utils';
 
@@ -14,7 +14,7 @@ import { gitError } from '../utils';
  * 获取当前执行的版本的信息
  *
  */
-export async function getVersion() {
+export async function getVersion(test?: boolean) {
   const { pkg, gitInfo, commandParameters } = dataStore;
 
   const packageJsonDir = getDirectoryBy('package.json', 'file');
@@ -32,6 +32,7 @@ export async function getVersion() {
   dog(`获取到的版本号为 <${version}>`);
 
   pkg.version = version;
-
-  dataStore.tag = commandParameters.tag = gitInfo.tag = `v${version}`;
+  if (isFalse(test)) {
+    dataStore.tag = commandParameters.tag = gitInfo.tag = `v${version}`;
+  }
 }

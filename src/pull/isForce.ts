@@ -1,4 +1,4 @@
-import { isFalse, isUndefined } from 'a-type-of-js';
+import { isFalse, isUndefined, isZero } from 'a-type-of-js';
 import { commandParameters } from './../data-store/commandParameters';
 import { command } from 'src/command';
 import { gitError } from 'src/utils';
@@ -39,5 +39,5 @@ export async function isForce(): Promise<boolean> {
     return await gitError('好的，您选择了退出，正在做退出前最后的处理');
   }
 
-  return result === 0;
+  return isZero(result);
 }

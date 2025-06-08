@@ -1,4 +1,4 @@
-import { isBusinessEmptyString } from 'a-type-of-js';
+import { isBusinessEmptyString, isZero } from 'a-type-of-js';
 import { dog } from './../dog';
 import { _p, runOtherCode } from 'a-node-tools';
 import { gitError } from '../utils';
@@ -37,7 +37,7 @@ export async function getRemote() {
   // 获取远程仓库信息 ✅  判断是否为🈳
   // 本地的远程库设置为🈳时则清🈳配置
   // 清🈳配置而 commandParameters.alias 不为🈳
-  if (remoteNumber === 0) {
+  if (isZero(remoteNumber)) {
     gitInfo.alias = '';
     gitInfo.url = '';
     return;

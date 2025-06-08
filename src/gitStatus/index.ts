@@ -1,6 +1,7 @@
-import { add, manageUntrackedFile } from './add';
+import { add } from './add';
 import { stagingArea } from './commit';
 import { gitInitialized } from './init';
+import { manageUntrackedFile } from './manageUntrackedFile';
 
 /**
  *
