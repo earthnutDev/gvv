@@ -1,14 +1,14 @@
 {
   "name": "gvv",
   "type": "module",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": true,
   "description": "一键 git 提交: git add + git commit + git push",
   "scripts": {
     "beautify": "npm run eslint && npm run prettier",
     "build": "jja cls rm dist && rollup --config rollup.config.js && npm run clean:package",
     "clean:package": "node scripts/clean-package-json.js",
-    "dev": "npm run build &&gvv_dev=false node --trace-warnings dist/bin.mjs",
+    "dev": "npm run build &&gvv_dev=all node --trace-warnings dist/bin.mjs",
     "diff": "jja pkg -d",
     "eslint": "eslint src",
     "prettier": "prettier . --write",

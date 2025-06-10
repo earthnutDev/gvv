@@ -12,6 +12,7 @@ import { tag } from './tag';
 import { checkTags } from './tag/checkTags';
 import { fetch } from './pull';
 import { onExit } from './onExit';
+import { execFetchTag } from './pull/execFetchTag';
 
 /**
  *
@@ -41,8 +42,7 @@ export async function main(): Promise<void> {
   dog.warn('是否安装 git 应用检测完毕');
   await gitBranch(); // 获取当前的分支情况
   dog.warn('当前分支情况判断完毕');
-  await fetch(); // 拉取分支并合并
-  dog.warn('拉取线上分支完毕');
+  await execFetchTag();
   if (!isFalse(commandParameters.tag)) {
     dog('设置当前提交的 tag');
     await checkTags();
@@ -51,6 +51,8 @@ export async function main(): Promise<void> {
   dog.warn('检测本地 tag 完毕');
   await gitStatus(); // 获取 git 状态并进行提交
   dog.warn('文件修改状态检测完毕');
+  await fetch(); // 拉取分支并合并
+  dog.warn('拉取线上分支完毕');
   // 用户主动使用 `-t` 或 `tag` 标签时或未传入该值而 `kind` 为 `version` 值时，为本次提交进行打标签
   if (!isFalse(commandParameters.tag)) await tag(); // 打标签
 
