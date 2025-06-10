@@ -22,9 +22,9 @@
   "license": "MIT",
   "dependencies": {
     "@qqi/dev-log": "^1.0.3",
-    "a-command": "^2.3.6",
+    "a-command": "^2.3.7",
     "a-js-tools": "^1.0.0",
-    "a-node-tools": "^4.2.5",
+    "a-node-tools": "^4.2.6",
     "a-type-of-js": "^1.0.1",
     "color-pen": "^2.0.10"
   },
@@ -43,15 +43,15 @@
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.2",
-    "@types/node": "^22.15.30",
+    "@types/node": "^24.0.0",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-jsdoc": "^50.7.1",
     "globals": "^16.2.0",
     "husky": "^9.1.7",
-    "jja": "^2.3.7",
+    "jja": "^2.3.8",
     "lint-staged": "^16.1.0",
-    "pjj": "^1.0.0",
+    "pjj": "^1.0.1",
     "prettier": "^3.5.3",
     "rollup": "^4.42.0",
     "rollup-plugin-cleanup": "^3.2.1",
@@ -59,7 +59,7 @@
     "ts-jest": "^29.3.4",
     "tslib": "^2.8.1",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.33.1",
-    "vjj": "^1.0.4"
+    "typescript-eslint": "^8.34.0",
+    "vjj": "^1.0.5"
   }
 }
