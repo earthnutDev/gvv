@@ -27,5 +27,5 @@ export function getMessage(withTag: boolean = false) {
           .join('')
           .replace(/"/, "'");
 
-  return `${kind || 'submit'} : ${withTag ? (tag ?? '') : ''} ${time} \n ${result}`;
+  return `${kind || 'submit'} : ${withTag ? tag || '' : ''} ${time} \n ${result}`;
 }
