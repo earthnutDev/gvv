@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { dog } from './../dog';
 import { isFalse } from 'a-type-of-js';
 import { dataStore } from '../data-store';
@@ -18,6 +19,7 @@ export async function execFetchBranch() {
   const result = await runOtherCode({
     // code: `git fetch ${alias}  ${fetchBrach}`,
     code,
+    cwd,
     waiting: {
       info: '请稍等，正在同步线上数据',
       prefix: 0,

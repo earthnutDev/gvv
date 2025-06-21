@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { gitInfo } from './../data-store/gitInfo';
 import { dog } from './../dog';
 import { _p, runOtherCode } from 'a-node-tools';
@@ -13,7 +14,7 @@ export async function execStashPop() {
     return _p('当前储存区没有本次执行的内容');
   }
   const code = 'git stash pop';
-  const result = await runOtherCode(code);
+  const result = await runOtherCode({ code, cwd });
 
   dog('将储存区的文件取出', code, result);
   if (isFalse(result.success)) {

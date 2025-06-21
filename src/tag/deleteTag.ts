@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { dog } from './../dog';
 import { gitInfo } from './../data-store/gitInfo';
 import { isTrue } from 'a-type-of-js';
@@ -13,6 +14,6 @@ export async function deleteTag() {
   const { pkg, tag } = dataStore;
   gitInfo.tagged = false;
   const code = `git tag -d ${isTrue(tag) ? 'v'.concat(pkg.version) : tag}`;
-  const result = await runOtherCode(code);
+  const result = await runOtherCode({ code, cwd });
   dog('删除已打好的标签', code, result);
 }

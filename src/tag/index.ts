@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { dog } from './../dog';
 import { runOtherCode } from 'a-node-tools';
 import { dataStore } from '../data-store';
@@ -27,7 +28,7 @@ export async function tag() {
     code = `git tag -a ${tag} -m "${message}" `;
   }
 
-  const result = await runOtherCode(code);
+  const result = await runOtherCode({ code, cwd });
 
   dog('执行打标签的代码为 <', code, result);
   if (isFalse(result.success)) {

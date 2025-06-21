@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { dataStore } from '../data-store';
 import { dog } from './../dog';
 import { cyanPen, hexPen, randomPen } from 'color-pen';
@@ -20,7 +21,7 @@ export async function checkTags() {
   }
   const code = 'git tag --list';
   // 获取本地的 tag 值列表
-  const result = await runOtherCode(code);
+  const result = await runOtherCode({ code, cwd });
 
   dog('获取本地的标签', code, result);
 

@@ -20,7 +20,13 @@ export default {
   ],
   // 配置需要排除的包
   external: external({
-    include: ['src/command', 'src/utils', 'src/dog', 'src/data-store'],
+    include: [
+      'src/command',
+      'src/utils',
+      'src/dog',
+      'src/data-store',
+      'src/data-store/cwd',
+    ],
   }),
   plugins: [
     resolve(),

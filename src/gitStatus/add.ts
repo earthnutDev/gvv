@@ -4,6 +4,7 @@ import { _p, runOtherCode } from 'a-node-tools';
 import { trackedButNotStaged } from './trackAndStagArea';
 import { randomPen } from 'color-pen';
 import { isEmptyString } from 'a-type-of-js';
+import { cwd } from 'src/data-store/cwd';
 
 /**
  *
@@ -29,7 +30,7 @@ export async function add() {
     }
     const code = 'git add --update';
     // 将本地未添加追踪的文件添加追踪（将直接放置到暂存区中）
-    const result = await runOtherCode(code);
+    const result = await runOtherCode({ code, cwd });
     dog('判断当前是否存在尚未添加到暂存区的已追踪的修改文件', code, result);
   }
 }

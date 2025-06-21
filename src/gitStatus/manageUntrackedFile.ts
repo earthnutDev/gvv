@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { dataStore } from 'src/data-store';
 import { unTrackedFiles } from './trackAndStagArea';
 import { dog } from 'src/dog';
@@ -54,7 +55,7 @@ async function addTrack(untrackedFileList: string[]) {
     return;
   }
   const code = `git add ${result.join(' ')}`;
-  const response = await runOtherCode(code);
+  const response = await runOtherCode({ code, cwd });
   dog('是否将未追踪的文件添加到追踪区', result, code, response);
   if (!response.success) {
     return await gitError('执行', response.error || response.data);

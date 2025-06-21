@@ -56,6 +56,8 @@ export type GitInfo = {
    * 是否已经提交
    */
   committed: boolean;
+  /**  是否是在 git 的跟文件执行的命令  */
+  isRoot: boolean;
 };
 
 /**  使用参数  */

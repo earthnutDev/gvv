@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import {
   brightCyanPen,
   brightGreenPen,
@@ -26,6 +27,7 @@ export async function push() {
   const result = await runOtherCode({
     code,
     waiting: `正在将本地 ${greenPen(localBranch)} 推送到 ${magentaPen(alias)} 的 ${cyanPen(pushBrach)} `,
+    cwd,
   });
   dog('执行推送的代码为：', code, result);
 

@@ -14,4 +14,5 @@ export const gitInfo: GitInfo = {
   stashed: false,
   tagged: false,
   committed: false,
+  isRoot: true,
 };

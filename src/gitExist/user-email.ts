@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { dog } from './../dog';
 import { runOtherCode } from 'a-node-tools';
 import { command } from '../command';
@@ -10,11 +11,11 @@ import { isEmptyString, isFalse, isUndefined } from 'a-type-of-js';
 export async function gitUserEmail() {
   let code = 'git config user.email';
   /**  本地仓库的用户名  */
-  const localUserEmail = await runOtherCode(code);
+  const localUserEmail = await runOtherCode({ code, cwd });
   dog('本地仓库的名', code, localUserEmail);
   code = 'git config --global user.email';
   /**  全局的用户名  */
-  const globalUserEmail = await runOtherCode(code);
+  const globalUserEmail = await runOtherCode({ code, cwd });
 
   dog('全局仓库的邮箱', code, globalUserEmail);
   if ([localUserEmail.success, globalUserEmail.success].some(e => isFalse(e))) {
@@ -54,7 +55,7 @@ export async function setUserEmail() {
     await gitError('邮箱 📮 不能为🈳');
   } else {
     const code = `git config --global user.email "${email}"`;
-    const result = await runOtherCode(code);
+    const result = await runOtherCode({ code, cwd });
     dog('设置用户的名', email, code, result);
   }
 }

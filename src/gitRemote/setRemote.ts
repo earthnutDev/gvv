@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { runOtherCode } from 'a-node-tools';
 import { dataStore } from '../data-store';
 import { gitError } from '../utils';
@@ -14,7 +15,7 @@ import { dog } from '../dog';
 export async function setRemote() {
   const { gitInfo } = dataStore;
   const code = `git remote add ${gitInfo.alias} ${gitInfo.url}`;
-  const result = await runOtherCode(code);
+  const result = await runOtherCode({ code, cwd });
   dog('配置远程库', code, result);
 
   if (isFalse(result.success)) {

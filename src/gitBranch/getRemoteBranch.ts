@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { dog } from './../dog';
 import { runOtherCode } from 'a-node-tools';
 import { isString, isFalse, isEmptyString } from 'a-type-of-js';
@@ -16,7 +17,7 @@ export async function getRemoteBranch() {
   /**
    * 获取远程当前分支名的分支信息
    */
-  const result = await runOtherCode(code);
+  const result = await runOtherCode({ code, cwd });
 
   dog('获取远程当前分支的信息', code, result);
 

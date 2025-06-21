@@ -24,6 +24,7 @@ import { dog } from './../dog';
 import { runOtherCode } from 'a-node-tools';
 import { dataStore } from '../data-store';
 import { gitError } from '../utils';
+import { cwd } from 'src/data-store/cwd';
 
 /**
  *
@@ -34,7 +35,7 @@ export async function getLocalBranch() {
   // 或者 git rev-parse --abbrev-ref HEAD
   const code = 'git branch --show-current';
   /**  获取本地的分支信息  */
-  const result = await runOtherCode(code);
+  const result = await runOtherCode({ code, cwd });
 
   dog('获取分支信息', code, result);
 

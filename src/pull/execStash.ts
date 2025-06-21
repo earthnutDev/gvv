@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { dog } from './../dog';
 import { runOtherCode } from 'a-node-tools';
 import { isFalse } from 'a-type-of-js';
@@ -10,7 +11,7 @@ import { gitInfo } from '../data-store/gitInfo';
 export async function execStash() {
   const code = `git stash save -u 'work in progress'`;
 
-  const result = await runOtherCode(code);
+  const result = await runOtherCode({ code, cwd });
 
   dog('将当前文件放置到储存区', code, result);
 

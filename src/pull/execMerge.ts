@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { dataStore } from '../data-store';
 import { dog } from './../dog';
 import { _p, runOtherCode } from 'a-node-tools';
@@ -16,6 +17,7 @@ export async function execMerge() {
   const result = await runOtherCode({
     code,
     waiting: '请等待代码合并',
+    cwd,
   });
   dog('合并分支', code, result);
   if (isFalse(result.success)) {

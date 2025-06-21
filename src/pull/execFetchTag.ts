@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { dog } from './../dog';
 import { isFalse } from 'a-type-of-js';
 import { dataStore } from '../data-store';
@@ -24,6 +25,7 @@ export async function execFetchTag() {
       prefix: 1,
       info: '正在拉取线上 tag 数据',
     },
+    cwd,
   });
   dog('执行拉起线上标签', code, result);
 

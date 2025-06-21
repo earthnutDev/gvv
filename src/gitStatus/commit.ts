@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { dataStore } from '../data-store';
 import { dog } from './../dog';
 import { runOtherCode } from 'a-node-tools';
@@ -39,7 +40,7 @@ export async function commit() {
   /**  构建提交的代码  */
   const code = `git commit -m "${getMessage(true)}"`;
 
-  const result = await runOtherCode(code);
+  const result = await runOtherCode({ code, cwd });
 
   dog('提交代码', code, result);
 

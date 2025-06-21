@@ -1,3 +1,4 @@
+import { cwd } from './data-store/cwd';
 import { gitInfo } from './data-store/gitInfo';
 import { command } from './command';
 import { colorLine, cursorAfterClear, runOtherCode } from 'a-node-tools';
@@ -72,7 +73,7 @@ export async function gitError(...error: string[]): Promise<never> {
 export async function gitReset() {
   gitInfo.committed = false;
   const code = 'git reset --soft HEAD^';
-  const result = await runOtherCode(code);
+  const result = await runOtherCode({ code, cwd });
   dog('重置已提交的代码', code, result);
   await gitRestore(gitInfo.untrackedFiles);
   await gitRestore(gitInfo.trackedChangedFiles);
@@ -86,7 +87,7 @@ export async function gitReset() {
 export async function gitRestore(fileList: string[]) {
   if (!isEmptyArray(fileList)) {
     const code = `git restore --staged ${fileList.join('  ')}`;
-    const result = await runOtherCode(code);
+    const result = await runOtherCode({ code, cwd });
 
     dog('将文件移除暂存区', code, result);
   }

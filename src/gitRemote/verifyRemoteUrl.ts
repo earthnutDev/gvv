@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { isFalse } from 'a-type-of-js';
 import { dog } from './../dog';
 import { runOtherCode } from 'a-node-tools';
@@ -12,7 +13,7 @@ import { gitError } from '../utils';
 export async function verifyRemoteUrl() {
   const { gitInfo } = dataStore;
   const code = `git ls-remote --heads ${gitInfo.url}`;
-  const result = await runOtherCode(code);
+  const result = await runOtherCode({ code, cwd });
 
   dog('校验当前远程仓库地址的正确性 ', code, result);
 

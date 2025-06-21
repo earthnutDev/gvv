@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { isBusinessEmptyString, isZero } from 'a-type-of-js';
 import { dog } from './../dog';
 import { _p, runOtherCode } from 'a-node-tools';
@@ -17,7 +18,7 @@ import { gitInfo } from '../data-store/gitInfo';
 export async function getRemote() {
   const code = 'git remote -v';
   /**  获取远程仓库信息  */
-  const result = await runOtherCode(code);
+  const result = await runOtherCode({ code, cwd });
   dog('获取远端的库信息', code, result);
   // 获取远程仓库信息 ❌
   if (!result.success || !result.data) {

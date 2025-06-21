@@ -1,3 +1,4 @@
+import { cwd } from './../data-store/cwd';
 import { dog } from './../dog';
 import { _p, runOtherCode } from 'a-node-tools';
 import { isString, isFalse, isUndefined } from 'a-type-of-js';
@@ -12,7 +13,7 @@ import { gitError } from '../utils';
  */
 export async function gitInitialized() {
   const code = 'git status';
-  const status = await runOtherCode(code);
+  const status = await runOtherCode({ code, cwd });
 
   dog('gitStatus: ', code, status);
 
@@ -71,7 +72,7 @@ export async function initializeGit() {
  */
 export async function gitInit() {
   const code = 'git init';
-  const result = await runOtherCode(code);
+  const result = await runOtherCode({ code });
 
   dog('执行 git init', code, result);
   if (isFalse(result.success)) {
