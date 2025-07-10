@@ -5,6 +5,7 @@ import json from '@rollup/plugin-json';
 import cleanup from 'rollup-plugin-cleanup';
 import copy from 'rollup-plugin-copy';
 import { external } from '@qqi/rollup-external';
+import terser from '@rollup/plugin-terser';
 
 export default {
   input: './bin.ts',
@@ -12,7 +13,7 @@ export default {
     {
       format: 'es',
       entryFileNames: '[name].mjs',
-      preserveModules: true,
+      preserveModules: false,
       sourcemap: false,
       exports: 'named',
       dir: 'dist/',
@@ -36,6 +37,7 @@ export default {
     typescript({}),
     // 去除无用代码
     cleanup(),
+    terser(),
     copy({
       targets: [
         { src: 'README.md', dest: 'dist' },

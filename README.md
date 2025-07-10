@@ -6,6 +6,14 @@
 
 一键 git 提交，在根目录将执行 `git add . && git commit -m "commit message" && git push origin main`
 
+原来是通过一段 `shell` 命令执行推送：
+
+```bash
+bash -c 'git add . && git commit -m \"deploy:   $(date +\"%Y-%m-%d %H:%M:%S\")${1:+ }$1\" && git push origin main' --
+```
+
+后来据说该命令无法在 windows 系统下执行，所以做了这个功能包。
+
 ## 安装
 
 ```bash
