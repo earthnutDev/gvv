@@ -8,10 +8,10 @@ import { command } from 'src/command';
 import { isFalse, isUndefined } from 'a-type-of-js';
 /**  合并之前  */
 export async function beforeMerge() {
-  const { branch, alias } = dataStore.gitInfo;
+  const { branch, alias, localBranch } = dataStore.gitInfo;
 
   /// 判定输出是否有冲突，有冲突工作则为 false ，否则 true
-  const code = `git merge-tree --write-tree HEAD ${alias}/${branch}`;
+  const code = `git merge-tree --write-tree HEAD ${alias}/${branch || localBranch}`;
   /// 返回具体的执行冲突文件及部位 ,判定 <<<<<<< 或 >>>>>>> 来确定有冲突
   // const code = `git merge-tree --write-tree \`git merge-base HEAD ${alias}/${branch}\` HEAD ${alias}/${branch}`;
 

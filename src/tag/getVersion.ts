@@ -14,8 +14,10 @@ import { cwd } from 'src/data-store/cwd';
  *
  * 获取当前执行的版本的信息
  *
+ * @param [test=false]  是否为测试环境
+ *
  */
-export async function getVersion() {
+export async function getVersion(test: boolean = false) {
   const { pkg, gitInfo, commandParameters } = dataStore;
 
   const packageJsonDir = getDirectoryBy('package.json', 'file');
@@ -35,10 +37,14 @@ export async function getVersion() {
   dog(`当前 package 的目录和 根目录 `, packageJsonDir, cwd);
 
   pkg.version = version;
-  dataStore.tag =
-    commandParameters.tag =
-    gitInfo.tag =
-      packageJsonDir === cwd
-        ? `v${version}`
-        : (packageJson?.name ?? 'core').replace(/[-/@]/gm, '_').concat(version);
+  if (!test) {
+    dataStore.tag =
+      commandParameters.tag =
+      gitInfo.tag =
+        packageJsonDir === cwd
+          ? `v${version}`
+          : (packageJson?.name ?? 'core')
+              .replace(/[-/@]/gm, '_')
+              .concat(version);
+  }
 }

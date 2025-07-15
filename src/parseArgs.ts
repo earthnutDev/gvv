@@ -89,7 +89,7 @@ export function parseArgs(): void {
   }
 
   if (!dun) {
-    getVersion();
+    getVersion(true);
     dog('参数解析完毕', dataStore);
     dog('tag 使用消息', getMessage());
     dog('推送使用消息', getMessage(true));
