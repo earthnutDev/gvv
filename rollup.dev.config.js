@@ -19,7 +19,7 @@ export default {
   ],
   // 配置需要排除的包
   external: external({
-    ignore: ['src/data-store'],
+    ignore: ['src/data-store', 'src/waiting'],
   }),
   plugins: [
     resolve(),

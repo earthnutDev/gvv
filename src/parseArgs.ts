@@ -59,7 +59,10 @@ export function parseArgs(): void {
   const message = argsMap.message;
   // 获取用户输入的 message 参数
   if (message && message.value && message.value.length > 0) {
-    dataStore.message = message.value;
+    dataStore.message = [...args.$nomatch, ...message.value];
+    commandParameters.message = [...dataStore.message];
+  } else {
+    dataStore.message = [...args.$nomatch];
     commandParameters.message = [...dataStore.message];
   }
 
@@ -86,7 +89,7 @@ export function parseArgs(): void {
   }
 
   if (!dun) {
-    getVersion(true);
+    getVersion();
     dog('参数解析完毕', dataStore);
     dog('tag 使用消息', getMessage());
     dog('推送使用消息', getMessage(true));

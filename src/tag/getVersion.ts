@@ -5,16 +5,17 @@ import {
   pathJoin,
   readFileToJsonSync,
 } from 'a-node-tools';
-import { isFalse, isUndefined } from 'a-type-of-js';
+import { isUndefined } from 'a-type-of-js';
 import { dataStore } from '../data-store';
 import { gitError } from '../utils';
+import { cwd } from 'src/data-store/cwd';
 
 /**
  *
  * 获取当前执行的版本的信息
  *
  */
-export async function getVersion(test?: boolean) {
+export async function getVersion() {
   const { pkg, gitInfo, commandParameters } = dataStore;
 
   const packageJsonDir = getDirectoryBy('package.json', 'file');
@@ -31,8 +32,13 @@ export async function getVersion(test?: boolean) {
   const version = packageJson?.version || '';
   dog(`获取到的版本号为 <${version}>`);
 
+  dog(`当前 package 的目录和 根目录 `, packageJsonDir, cwd);
+
   pkg.version = version;
-  if (isFalse(test)) {
-    dataStore.tag = commandParameters.tag = gitInfo.tag = `v${version}`;
-  }
+  dataStore.tag =
+    commandParameters.tag =
+    gitInfo.tag =
+      packageJsonDir === cwd
+        ? `v${version}`
+        : (packageJson?.name ?? 'core').replace(/[-/@]/gm, '_').concat(version);
 }

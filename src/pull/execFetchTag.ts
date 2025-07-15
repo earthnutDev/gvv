@@ -5,6 +5,7 @@ import { dataStore } from '../data-store';
 import { runOtherCode } from 'a-node-tools';
 import { gitError } from '../utils';
 import { brightRedPen, redPen } from 'color-pen';
+import { waiting } from 'src/waiting';
 
 /**
  *
@@ -19,15 +20,20 @@ export async function execFetchTag() {
   }
 
   const code = `git fetch ${alias} --tags`;
+  waiting.run({
+    prefix: 1,
+    info: '正在拉取线上 tag 数据',
+  });
   const result = await runOtherCode({
     code,
-    waiting: {
-      prefix: 1,
-      info: '正在拉取线上 tag 数据',
-    },
+    waiting,
     cwd,
   });
   dog('执行拉起线上标签', code, result);
+
+  if (result.isSIGINT) {
+    return await gitError('稍等，这就退出');
+  }
 
   if (isFalse(result.success)) {
     if (/fatal:\s*repository\s*'.*'\s*not\s*found/i.test(result.error)) {

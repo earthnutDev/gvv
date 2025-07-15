@@ -4,6 +4,7 @@ import { isFalse } from 'a-type-of-js';
 import { dataStore } from '../data-store';
 import { _p, runOtherCode } from 'a-node-tools';
 import { gitError } from '../utils';
+import { waiting } from 'src/waiting';
 
 /**
  *
@@ -16,15 +17,20 @@ export async function execFetchBranch() {
   const { localBranch, branch } = gitInfo;
   const fetchBrach = branch || localBranch;
   const code = 'git fetch --all';
+  waiting.run({
+    info: '请稍等，正在同步线上数据',
+    prefix: 0,
+  });
   const result = await runOtherCode({
     // code: `git fetch ${alias}  ${fetchBrach}`,
     code,
     cwd,
-    waiting: {
-      info: '请稍等，正在同步线上数据',
-      prefix: 0,
-    },
+    waiting,
   });
+
+  if (result.isSIGINT) {
+    return await gitError();
+  }
 
   dog('请求线上代码', code, result);
   if (isFalse(result)) {

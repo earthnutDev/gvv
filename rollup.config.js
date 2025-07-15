@@ -27,6 +27,7 @@ export default {
       'src/dog',
       'src/data-store',
       'src/data-store/cwd',
+      'src/waiting',
     ],
   }),
   plugins: [

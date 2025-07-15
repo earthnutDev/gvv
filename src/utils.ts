@@ -9,20 +9,12 @@ import { sleep } from 'a-js-tools';
 import { waiting } from './waiting';
 import { dog } from './dog';
 
-/**
- *
- * 当前的时间
- *
- */
+/** 当前的时间 */
 export function now(): string {
   return new Date().toLocaleString();
 }
 
-/**
- *
- * 异常导致退出
- *
- */
+/** 异常导致退出 */
 export async function gitError(...error: string[]): Promise<never> {
   const info = error.join('\n');
   /**  配置输出文本样式  */
@@ -65,11 +57,7 @@ export async function gitError(...error: string[]): Promise<never> {
   return command.error();
 }
 
-/**
- *
- * 当 commit 后出现（打 tag 或是 push 错误）错误后取消提交
- *
- */
+/**  当 commit 后出现（打 tag 或是 push 错误）错误后取消提交 */
 export async function gitReset() {
   gitInfo.committed = false;
   const code = 'git reset --soft HEAD^';
@@ -79,11 +67,7 @@ export async function gitReset() {
   await gitRestore(gitInfo.trackedChangedFiles);
 }
 
-/**
- *
- * 将文件移除暂存区
- *
- */
+/** 将文件移除暂存区 */
 export async function gitRestore(fileList: string[]) {
   if (!isEmptyArray(fileList)) {
     const code = `git restore --staged ${fileList.join('  ')}`;

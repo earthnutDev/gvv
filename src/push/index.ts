@@ -12,6 +12,7 @@ import { _p, runOtherCode } from 'a-node-tools';
 import { gitError } from '../utils';
 import { pushFail } from './pushFail';
 import { gitInfo } from '../data-store/gitInfo';
+import { waiting } from 'src/waiting';
 /**
  *
  * 推送代码到远程库
@@ -24,9 +25,13 @@ export async function push() {
   /**  执行的 shell 命令  */
   const code = `git push ${alias} ${localBranch}:${pushBrach} --tags ${force ? '--force' : ''}`;
 
+  waiting.run(
+    `正在将本地 ${greenPen(localBranch)} 推送到 ${magentaPen(alias)} 的 ${cyanPen(pushBrach)} `,
+  );
+
   const result = await runOtherCode({
     code,
-    waiting: `正在将本地 ${greenPen(localBranch)} 推送到 ${magentaPen(alias)} 的 ${cyanPen(pushBrach)} `,
+    waiting,
     cwd,
   });
   dog('执行推送的代码为：', code, result);

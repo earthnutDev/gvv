@@ -5,6 +5,7 @@ import { _p, runOtherCode } from 'a-node-tools';
 import { isFalse } from 'a-type-of-js';
 import { gitError } from '../utils';
 import { magentaPen } from 'color-pen';
+import { waiting } from 'src/waiting';
 
 /**
  * 合并分支
@@ -14,11 +15,16 @@ export async function execMerge() {
   const { alias, localBranch, branch } = gitInfo;
   const mergeBrach = branch || localBranch;
   const code = `git merge  ${alias}/${mergeBrach}`;
+
+  waiting.run('请等待代码合并');
   const result = await runOtherCode({
     code,
-    waiting: '请等待代码合并',
+    waiting,
     cwd,
   });
+  if (result.isSIGINT) {
+    return await gitError();
+  }
   dog('合并分支', code, result);
   if (isFalse(result.success)) {
     dog.error('合并分支出现问题', result);

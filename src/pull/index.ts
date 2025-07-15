@@ -16,6 +16,7 @@ import { gitInfo } from './../data-store/gitInfo';
 import { execFetchBranch } from './execFetchBranch';
 import { execMerge } from './execMerge';
 import { isForce } from './isForce';
+import { beforeMerge } from './before-merge';
 
 /**
  *
@@ -29,6 +30,7 @@ export async function fetch() {
   }
   await execFetchBranch(); // 拉取线上的分支详情
   // await execStash(); // 先暂存代码
+  await beforeMerge();
   await execMerge(); // 执行代码合并
   if (gitInfo.stashed) {
     dog('当前储存区有文件，正在执行取出');
