@@ -13,12 +13,12 @@ import { isFalse, isTrue } from 'a-type-of-js';
  *
  */
 export async function checkTags() {
-  const { tag, pkg, gitInfo } = dataStore;
-
   // 当未使用 tag 或者主动给 tag 赋值 true 时意味着使用 当前的版本作为 tag 值
-  if (isTrue(tag)) {
+  if (isTrue(dataStore.tag)) {
     await getVersion();
   }
+  const { pkg, gitInfo, tag } = dataStore;
+
   const code = 'git tag --list';
   // 获取本地的 tag 值列表
   const result = await runOtherCode({ code, cwd });
@@ -40,7 +40,11 @@ export async function checkTags() {
   //
   gitInfo.tags = tagList;
 
-  dog('已有的 tag 列表', tagList);
+  dog('已有的 tag 列表', tagList.slice(0, 100));
+
+  // tag 值在上面 getVersion 时触发了更改，这里需要重新给值
+
+  dog('当前的 tag 值为', tag);
 
   if (tagList.includes(isTrue(tag) ? `v${pkg.version}` : tag.toString())) {
     dog.error('已存在该 tag 值');

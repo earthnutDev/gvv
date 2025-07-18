@@ -20,14 +20,13 @@ import { isEmptyString } from 'a-type-of-js';
  *
  */
 export async function gitBranch(): Promise<void> {
-  const { gitInfo } = dataStore;
-
   // 获取本地分支信息
   await getLocalBranch();
 
   // 获取远端分支信息
   await getRemoteBranch();
 
+  const { gitInfo } = dataStore;
   //  当两者🀄️的任一个没有值，说明未设置默认推送关联分支
   // 两个值同时在  `getRemoteBranch` 🀄️ 配置，没有值意味着并没有配置默认推送的
   if ([gitInfo.alias, gitInfo.branch].some(e => isEmptyString(e))) {

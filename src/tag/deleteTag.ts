@@ -13,7 +13,9 @@ import { runOtherCode } from 'a-node-tools';
 export async function deleteTag() {
   const { pkg, tag } = dataStore;
   gitInfo.tagged = false;
-  const code = `git tag -d ${isTrue(tag) ? 'v'.concat(pkg.version) : tag}`;
+  /**  标签  */
+  const _tag = isTrue(tag) ? 'v'.concat(pkg.version) : tag;
+  const code = `git tag -d ${_tag}`;
   const result = await runOtherCode({ code, cwd });
   dog('删除已打好的标签', code, result);
 }

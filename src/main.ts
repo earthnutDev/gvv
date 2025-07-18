@@ -23,12 +23,13 @@ import { execFetchTag } from './pull/execFetchTag';
  */
 export async function main(): Promise<void> {
   onExit();
-  const { commandParameters } = dataStore;
   // 在一开始的时候，使用的 `a-node-tools` 为 0.1.1 版本
   // 在该版本的 `runOtherCode` 未移除 process.on('exit') 监听，导致需要该配置，现在可移除
   process.setMaxListeners(20); // 设置最大监听事件
   parseArgs(); // 解析命令行参数
   // 查看是否是 `init` 命令进入，是的话仅进行 git 初始化
+
+  const { commandParameters } = dataStore;
 
   if (dataStore.init) {
     dog('当前执行为（仅）初始化 git');

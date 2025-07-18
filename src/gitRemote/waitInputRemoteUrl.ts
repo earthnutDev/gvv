@@ -10,7 +10,6 @@ import { isEmptyString, isUndefined } from 'a-type-of-js';
  *
  */
 export async function waitInputRemoteUrl() {
-  const { gitInfo } = dataStore;
   _p('当前未配置 🛠️ 远程库');
 
   const result = await command.question({
@@ -28,5 +27,5 @@ export async function waitInputRemoteUrl() {
     return await gitError('远程分支的链接不能为🈳');
   }
 
-  gitInfo.url = result;
+  dataStore.gitInfo.url = result;
 }

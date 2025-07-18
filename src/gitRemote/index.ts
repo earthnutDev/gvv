@@ -25,8 +25,9 @@ import { isEmptyString } from 'a-type-of-js';
  *
  */
 export async function hasRemote() {
-  const { gitInfo } = dataStore;
   await getRemote();
+
+  const { gitInfo } = dataStore;
 
   /**  未关联远程分支（或是本地为未设置任何远程库）  */
   if (isEmptyString(gitInfo.alias)) {
