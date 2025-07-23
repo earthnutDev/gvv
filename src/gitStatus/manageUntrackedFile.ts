@@ -54,7 +54,7 @@ async function addTrack(untrackedFileList: string[]) {
   if (isUndefined(result)) {
     return;
   }
-  const code = `git add ${result.join(' ')}`;
+  const code = `git add "${result.join('" "')}"`;
   const response = await runOtherCode({ code, cwd });
   dog('是否将未追踪的文件添加到追踪区', result, code, response);
   if (!response.success) {

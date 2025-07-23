@@ -70,7 +70,7 @@ export async function gitReset() {
 /** 将文件移除暂存区 */
 export async function gitRestore(fileList: string[]) {
   if (!isEmptyArray(fileList)) {
-    const code = `git restore --staged ${fileList.join('  ')}`;
+    const code = `git restore --staged "${fileList.join('"  "')}"`;
     const result = await runOtherCode({ code, cwd });
 
     dog('将文件移除暂存区', code, result);
