@@ -27,4 +27,5 @@ export const dataStore: DateStore = {
     version: '',
     path: '',
   },
+  voluntaryWIthdrawal: false,
 };

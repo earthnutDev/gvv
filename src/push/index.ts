@@ -13,6 +13,7 @@ import { gitError } from '../utils';
 import { pushFail } from './pushFail';
 import { gitInfo } from '../data-store/gitInfo';
 import { waiting } from 'src/waiting';
+import { removeExitEvent } from 'src/onExit';
 /**
  *
  * 推送代码到远程库
@@ -55,4 +56,5 @@ export async function push() {
   _p(
     `已经本地的修改推送到 ${brightGreenPen(alias)}/${brightCyanPen(pushBrach)}`,
   );
+  removeExitEvent();
 }

@@ -22,6 +22,7 @@ export async function beforeMerge() {
   dog('冲突判断', result);
 
   if (result.isSIGINT) {
+    dataStore.voluntaryWIthdrawal = true;
     return await gitError('好的，正在为您做退出前的准备');
   }
 

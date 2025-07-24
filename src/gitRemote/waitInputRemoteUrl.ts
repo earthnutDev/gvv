@@ -20,6 +20,7 @@ export async function waitInputRemoteUrl() {
   });
 
   if (isUndefined(result)) {
+    dataStore.voluntaryWIthdrawal = true;
     return await gitError('您选择了退出，即将退出');
   }
 

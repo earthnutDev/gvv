@@ -4,6 +4,7 @@ import { runOtherCode } from 'a-node-tools';
 import { command } from '../command';
 import { gitError } from '../utils';
 import { isEmptyString, isFalse, isUndefined } from 'a-type-of-js';
+import { dataStore } from 'src/data-store';
 
 /**
  * git 的账户
@@ -48,6 +49,7 @@ export async function setUserEmail() {
   });
 
   if (isUndefined(email)) {
+    dataStore.voluntaryWIthdrawal = true;
     return await gitError('您选择了退出，请稍等，正在清理');
   }
 

@@ -5,6 +5,7 @@ import { isString, isFalse, isUndefined } from 'a-type-of-js';
 import { greenPen } from 'color-pen';
 import { command } from '../command';
 import { gitError } from '../utils';
+import { dataStore } from 'src/data-store';
 
 /**
  *
@@ -52,6 +53,7 @@ export async function initializeGit() {
   });
 
   if (isUndefined(result)) {
+    dataStore.voluntaryWIthdrawal = true;
     return await gitError('好的，正在退出');
   }
 

@@ -3,6 +3,7 @@ import { commandParameters } from './../data-store/commandParameters';
 import { command } from 'src/command';
 import { gitError } from 'src/utils';
 import { blinkPen, brightRedPen, greenPen } from 'color-pen';
+import { dataStore } from 'src/data-store';
 /**
  *
  * 是否是否强制推送而跳过当前的拉取
@@ -36,6 +37,7 @@ export async function isForce(): Promise<boolean> {
   });
 
   if (isUndefined(result) || result === 2) {
+    dataStore.voluntaryWIthdrawal = true;
     return await gitError('好的，您选择了退出，正在做退出前最后的处理');
   }
 

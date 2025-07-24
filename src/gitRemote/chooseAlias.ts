@@ -3,6 +3,7 @@ import { command } from '../command';
 import { gitError } from '../utils';
 import { setAlias } from './setAlias';
 import { isEmptyString, isUndefined } from 'a-type-of-js';
+import { dataStore } from 'src/data-store';
 
 /**
  *
@@ -25,6 +26,7 @@ export async function chooseAlias(remoteAliases: { [x: string]: string }) {
   });
 
   if (isUndefined(result)) {
+    dataStore.voluntaryWIthdrawal = true;
     return await gitError('您选择了退出，正在做退出前的清理，请稍等');
   }
 

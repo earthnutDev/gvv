@@ -8,6 +8,7 @@ import {
   isUndefined,
   isBusinessEmptyString,
 } from 'a-type-of-js';
+import { dataStore } from 'src/data-store';
 
 /**
  * git 的账户
@@ -50,6 +51,7 @@ export async function setUserName() {
   });
 
   if (isUndefined(username)) {
+    dataStore.voluntaryWIthdrawal = true;
     return await gitError('您选择了退出，请稍等，正在清理');
   }
 

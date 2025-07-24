@@ -23,6 +23,7 @@ export async function execMerge() {
     cwd,
   });
   if (result.isSIGINT) {
+    dataStore.voluntaryWIthdrawal = true;
     return await gitError();
   }
   dog('合并分支', code, result);

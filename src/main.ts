@@ -56,7 +56,6 @@ export async function main(): Promise<void> {
   dog.warn('拉取线上分支完毕');
   // 用户主动使用 `-t` 或 `tag` 标签时或未传入该值而 `kind` 为 `version` 值时，为本次提交进行打标签
   if (!isFalse(commandParameters.tag)) await tag(); // 打标签
-
-  dog.warn();
+  dog.warn('害怕不害怕');
   await push();
 }

@@ -29,6 +29,7 @@ export async function execFetchBranch() {
   });
 
   if (result.isSIGINT) {
+    dataStore.voluntaryWIthdrawal = true;
     return await gitError();
   }
 

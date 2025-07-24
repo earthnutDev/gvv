@@ -28,6 +28,7 @@ export default {
       'src/data-store',
       'src/data-store/cwd',
       'src/waiting',
+      'src/onExit',
     ],
   }),
   plugins: [

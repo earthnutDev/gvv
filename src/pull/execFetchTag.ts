@@ -32,6 +32,7 @@ export async function execFetchTag() {
   dog('执行拉起线上标签', code, result);
 
   if (result.isSIGINT) {
+    dataStore.voluntaryWIthdrawal = true;
     return await gitError('稍等，这就退出');
   }
 
