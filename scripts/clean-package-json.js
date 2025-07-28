@@ -18,9 +18,9 @@ packageJson = {
     email: 'earthnut.dev@outlook.com',
     url: 'https://earthnut.dev',
   },
-  files: ['src', 'bin.mjs'],
+  files: ['bin.mjs'],
   keywords: ['gvv', 'earthnut'],
-  homepage: 'https://earthnut.dev/gvv',
+  homepage: 'https://earthnut.dev/npm/gvv',
   bugs: {
     url: 'https://github.com/earthnutDev/gvv/issues',
     email: 'earthnut.dev@outlook.com',

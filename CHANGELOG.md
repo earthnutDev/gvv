@@ -1,5 +1,9 @@
 # gvv
 
+## v0.1.6 (2025-7-28)
+
+- 文档整理
+
 ## v0.1.5 (2025-7-24)
 
 优化了使用 `pnpm` 作为管理包工具时，正常退出程序时显示 `ELIFECYCLE  Command failed with exit code 1.` 错误信息提示。

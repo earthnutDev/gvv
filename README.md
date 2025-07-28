@@ -110,4 +110,4 @@ npx gvv -m "新版本" "添加主要功能" -m "待完善远程库配置"
 
 ## 文档地址
 
-参看 [https://earthnut.dev/gvv/](https://earthnut.dev/gvv/)
+参看 [https://earthnut.dev/npm/gvv/](https://earthnut.dev/npm/gvv/)
